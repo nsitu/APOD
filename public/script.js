@@ -3,7 +3,7 @@ let datePicker = document.querySelector('#datePicker');
 
 datePicker.addEventListener('change', (event)=>{ 
     let theDate = event.target.value;
-    axios.get('/api/'+theDate).then((response)=>{
+    axios.get('api/'+theDate).then((response)=>{
         console.log(response.data);        
         
         // reset contents of apod container
