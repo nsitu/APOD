@@ -1,6 +1,9 @@
 let apod = document.querySelector('#apod');
 let datePicker = document.querySelector('#datePicker');
 
+// https://stackoverflow.com/a/49916376/17929842
+datePicker.max = new Date().toISOString().split("T")[0];
+
 datePicker.addEventListener('change', (event)=>{ 
     let theDate = event.target.value;
     axios.get('api/'+theDate).then((response)=>{
