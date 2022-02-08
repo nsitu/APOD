@@ -9,9 +9,9 @@ app.use( cors() )
 app.use( express.json() )  
 
 
-app.use('/', express.static('public')) 
+app.use(process.env.ROOT_URL+'/', express.static('public')) 
 
-app.get('/api/:date', (req, res) => { 
+app.get(process.env.ROOT_URL+'/api/:date', (req, res) => { 
 
     const options = {
       method: 'GET',
