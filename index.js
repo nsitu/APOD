@@ -3,21 +3,24 @@ const axios = require('axios');
 const cors = require('cors');  
 const dotenv = require('dotenv').config()
 
+const ROOT_URL = process.env.ROOT_URL || '' 
+const API_KEY = process.env.API_KEY || ''
+const PORT = process.env.PORT || 5000
+
 const app	= express()
 
+// middleware
 app.use( cors() )          
 app.use( express.json() )  
+app.use(ROOT_URL+'/', express.static('public')) 
 
-
-app.use(process.env.ROOT_URL+'/', express.static('public')) 
-
-app.get(process.env.ROOT_URL+'/api/:date', (req, res) => { 
+app.get(ROOT_URL+'/api/:date', (req, res) => { 
 
     const options = {
       method: 'GET',
       url: 'https://api.nasa.gov/planetary/apod',
       params: {
-        api_key: process.env.API_KEY,
+        api_key: API_KEY,
         date: req.params.date
       }
     } 
@@ -32,8 +35,8 @@ app.get(process.env.ROOT_URL+'/api/:date', (req, res) => {
   })
 
 
-const port = process.env.PORT || 5000
-app.listen(port, () => {
-    console.log("We are live on port "+port )
+
+app.listen(PORT, () => {
+    console.log("We are live on port "+PORT )
 })
 
